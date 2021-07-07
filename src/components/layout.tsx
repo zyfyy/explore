@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
+// TODO gatsby-plugin-scss-typescript does not generat .d.ts file
 import { container } from './layout.module.css';
 
 const Layout = ({ pageTitle, children }) => {
