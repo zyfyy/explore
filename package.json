@@ -1,0 +1,26 @@
+{
+  "name": "my-github-explore",
+  "version": "1.0.0",
+  "private": true,
+  "description": "My Github Explore",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^3.8.1",
+    "gatsby-plugin-react-css-modules": "^3.9.0",
+    "gatsby-transformer-typescript-css-modules": "^1.0.14",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "gatsby-plugin-scss-typescript": "^5.1.0"
+  }
+}
