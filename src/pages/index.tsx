@@ -9,7 +9,7 @@ const IndexPage = () => {
     return (
         <Layout pageTitle="Home">
             <ul>
-                <li>github graphql api</li>
+                <li>github graphql api on gatsby graphql layer? </li>
             </ul>
         </Layout>
     );

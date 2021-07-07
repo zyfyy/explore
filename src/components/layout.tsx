@@ -22,7 +22,7 @@ const Layout = ({ pageTitle, children }) => {
     `);
     return (
         <main className={container}>
-            <title>{pageTitle} | {data.site.siteMetadata.title}</title>
+            <title>{`${pageTitle} | ${data.site.siteMetadata.title}`}</title>
             <p className={siteTitle}>{data.site.siteMetadata.title}</p>
             <nav>
                 <ul className={navLinks}>
