@@ -40,6 +40,7 @@ const Layout = ({ pageTitle, children }) => {
             </nav>
             <h1 className={heading}>{pageTitle}</h1>
             {children}
+
         </main>
     );
 };
