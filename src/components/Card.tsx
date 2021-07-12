@@ -29,6 +29,7 @@ const Img = styled.img`
     flex: 1;
     display: block;
     margin: 0 auto;
+    border-radius: 50%;
 `;
 const Desc = styled.div`
     flex: 2;
@@ -47,7 +48,12 @@ const Url = styled.a`
 `;
 
 const getHost = (url: string): string => {
-    return new URL(url).host;
+    try {
+        return new URL(url).host;
+    } catch (e) {
+        console.log(e, url);
+        return url;
+    }
 };
 
 function Card(props) {
