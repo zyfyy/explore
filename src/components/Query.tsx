@@ -8,7 +8,7 @@ import Loading from '../components/Loading';
 
 const gqlCLient = new GraphQLClient('https://api.github.com/graphql', {
     headers: {
-        authorization: `Bearer 0128952b37a4edfc2df2f75e5e167a9b9daed094`
+        authorization: `Bearer ${process.env.GATSBY_API_KEY}`
     }
 });
 

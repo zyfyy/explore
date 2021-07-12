@@ -1,4 +1,7 @@
 const path = require('path');
+require('dotenv').config({
+    path: '.env'
+});
 
 module.exports = {
     flags: {
@@ -8,6 +11,5 @@ module.exports = {
         title: 'My Github Explore',
         siteUrl: `https://www.yourdomain.tld`
     },
-    plugins: [
-    ]
+    plugins: []
 };
