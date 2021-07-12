@@ -25,7 +25,8 @@ const Content = styled.div`
     margin: 1em 0;
 `;
 const Img = styled.img`
-    width: 100px;
+    width: 150px;
+    height: 150px;
     flex: 1;
     display: block;
     margin: 0 auto;
