@@ -8536,6 +8536,13 @@ react-icons@^4.2.0:
   resolved "https://registry.npm.taobao.org/react-icons/download/react-icons-4.2.0.tgz#6dda80c8a8f338ff96a1851424d63083282630d0"
   integrity sha1-bdqAyKjzOP+WoYUUJNYwgygmMNA=
 
+react-infinite-scroll-component@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.nlark.com/react-infinite-scroll-component/download/react-infinite-scroll-component-6.1.0.tgz#7e511e7aa0f728ac3e51f64a38a6079ac522407f"
+  integrity sha1-flEeeqD3KKw+UfZKOKYHmsUiQH8=
+  dependencies:
+    throttle-debounce "^2.1.0"
+
 react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.nlark.com/react-is/download/react-is-16.13.1.tgz"
@@ -9943,6 +9950,11 @@ text-table@0.2.0, text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npm.taobao.org/text-table/download/text-table-0.2.0.tgz"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+throttle-debounce@^2.1.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/throttle-debounce/download/throttle-debounce-2.3.0.tgz#fd31865e66502071e411817e241465b3e9c372e2"
+  integrity sha1-/TGGXmZQIHHkEYF+JBRls+nDcuI=
 
 throttle-debounce@^3.0.1:
   version "3.0.1"

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { GraphQLClient, gql } from 'graphql-request';
 import { useToggle } from 'react-use';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Layout from '../components/layout';
 import Card from '../components/Card';
@@ -47,37 +48,46 @@ const query = gql`
 `;
 
 function ReactTopic() {
-    const [cards, setCards] = useState(null);
-    const [loading, toggleLoading] = useToggle(true);
+    const [cards, setCards] = useState([]);
+    const [cursor, setCursor] = useState(null);
+    const [hasMore, setHaseMore] = useState(true);
 
-    const req = useCallback(async () => {
+    const fetchData = useCallback(async () => {
         const data = await gqlCLient.request(query, {
-            query: 'topic:react stars:>10000'
+            query: 'topic:react stars:>10000',
+            cursor
         });
-        return data;
-    }, []);
+        const res = data.search.repos;
+        if (!res.length) {
+            setHaseMore(false);
+            return;
+        }
+        setCursor(res[res.length - 1]?.cursor);
+        setCards(pre => {
+            return pre.concat(res);
+        });
+    }, [cursor]);
 
     useEffect(() => {
-        toggleLoading(true);
-        const fetchData = async () => {
-            const data = await req();
-            console.log(data.search.repos);
-            setCards(data.search.repos);
-            toggleLoading(false);
-        };
         fetchData();
     }, []);
 
     return (
         <Layout pageTitle="React Topic">
-            <h4>纵览React技术栈生态</h4>
-            {cards && cards.length
-                ? cards.map((card, idx) => {
-                    return <Card key={idx} data={card.repo} />;
-                })
-                : ''}
-            <button>more</button>
-            {loading ? <Loading /> : ''}
+            <div>
+                <h4>纵览React技术栈生态</h4>
+                <InfiniteScroll
+                    dataLength={cards.length}
+                    hasMore={hasMore}
+                    next={fetchData}
+                    endMessage={`没有更多了(total: ${cards.length})`}
+                    loader={<Loading />}
+                >
+                    {cards.map(card => {
+                        return <Card key={card.cursor} data={card.repo} />;
+                    })}
+                </InfiniteScroll>
+            </div>
         </Layout>
     );
 }

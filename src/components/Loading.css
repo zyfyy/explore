@@ -5,6 +5,7 @@
     --c2: #f49725;
     --c3: #255ff4;
     --c4: #9725f4;
+    --c0: gray;
     /* font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320)); */
 }
 
@@ -37,21 +38,18 @@
     height: 0.75em;
     animation: bounce4 2s linear infinite;
     transform-origin: 50% 100%;
+    background: var(--c0);
 }
 
 .pl4__a {
-    background: var(--c1);
 }
 .pl4__b {
-    background: var(--c2);
     animation-delay: 0.1s;
 }
 .pl4__c {
-    background: var(--c3);
     animation-delay: 0.2s;
 }
 .pl4__d {
-    background: var(--c4);
     animation-delay: 0.3s;
 }
 @keyframes bounce4 {

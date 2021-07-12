@@ -64,7 +64,7 @@ function Card(props) {
             <Info>
                 <Star>star: {data.stars}</Star>
                 <Url href={data.homepageUrl} target="_blank">
-                    {getHost(data.homepageUrl)}
+                    {getHost(data.homepageUrl || data.url)}
                 </Url>
             </Info>
         </Border>
