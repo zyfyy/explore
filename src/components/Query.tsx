@@ -6,6 +6,8 @@ import Layout from './Layout';
 import Card from '../components/Card';
 import Loading from '../components/Loading';
 
+import './Query.css';
+
 const gqlCLient = new GraphQLClient('https://api.github.com/graphql', {
     headers: {
         authorization: `Bearer ${process.env.GATSBY_API_KEY}`
