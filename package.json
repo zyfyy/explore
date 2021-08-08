@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "gatsby": "^3.8.1",
-    "graphql-request": "^3.4.0",
+    "gatsby": "^3.11.0",
+    "graphql-request": "^3.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",

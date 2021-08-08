@@ -49,11 +49,14 @@ const graphqlQuery = gql`
     }
 `;
 
-interface githubQueryType {
+interface staticQueryType {
     title: string;
     query: string;
 }
-function GithubQuery({ title, query }: githubQueryType) {
+
+type githubQueryType = Pick<staticQueryType, 'query'>;
+
+export function GithubQuery({ query }: githubQueryType) {
     const [cards, setCards] = useState([]);
     const [cursor, setCursor] = useState(null);
     const [hasMore, setHaseMore] = useState(true);
@@ -75,26 +78,35 @@ function GithubQuery({ title, query }: githubQueryType) {
     }, [query, cursor]);
 
     useEffect(() => {
+        setCards([]);
+        setHaseMore(true);
         fetchData();
-    }, []);
+    }, [query]);
 
     return (
+        <div>
+            <InfiniteScroll
+                dataLength={cards.length}
+                hasMore={hasMore}
+                next={fetchData}
+                endMessage={`没有更多了(total: ${cards.length})`}
+                loader={<Loading />}
+            >
+                {cards.map(card => {
+                    return <Card key={card.cursor} data={card.repo} />;
+                })}
+            </InfiniteScroll>
+        </div>
+    );
+}
+
+function StaticQuery({ title, query }: staticQueryType) {
+    return (
         <Layout pageTitle={title}>
-            <div>
-                <InfiniteScroll
-                    dataLength={cards.length}
-                    hasMore={hasMore}
-                    next={fetchData}
-                    endMessage={`没有更多了(total: ${cards.length})`}
-                    loader={<Loading />}
-                >
-                    {cards.map(card => {
-                        return <Card key={card.cursor} data={card.repo} />;
-                    })}
-                </InfiniteScroll>
-            </div>
+            <GithubQuery query={query} />
         </Layout>
     );
 }
 
-export default GithubQuery;
+// export default GithubQuery;
+export default StaticQuery;
