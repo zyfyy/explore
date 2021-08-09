@@ -5,11 +5,18 @@ import styled from 'styled-components';
 import { GithubQuery } from '../components/Query';
 import Layout from '../components/Layout';
 
-const Input = styled.input.attrs(props => ({
-    type: 'text',
-    size: props.small ? 5 : props.size
-}))`
-    border-radius: 3px;
+type InputAttrProps = {
+    size: number;
+};
+
+type InputProps = {
+    padding: string;
+};
+
+const Input = styled.input.attrs<InputAttrProps>(props => ({
+    size: props.size
+}))<InputProps>`
+    border-radius: 10px;
     border: 1px solid gray;
     display: block;
     margin: 0 0 2em;
@@ -36,9 +43,9 @@ const ReactTopic = () => {
     );
 
     return (
-        <Layout pageTitle="Any topic ...">
+        <Layout pageTitle="Any topic">
             <Input
-                size="20"
+                size={30}
                 placeholder="topic..."
                 padding="6px 1em"
                 onChange={({ currentTarget }) => {
