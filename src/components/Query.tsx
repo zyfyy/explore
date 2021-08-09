@@ -61,7 +61,7 @@ export function GithubQuery({ query }: githubQueryType) {
     const [cursor, setCursor] = useState(null);
     const [hasMore, setHaseMore] = useState(true);
 
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(async (cursor: string) => {
         const data = await gqlCLient.request(graphqlQuery, {
             query,
             cursor
@@ -75,12 +75,12 @@ export function GithubQuery({ query }: githubQueryType) {
         setCards(pre => {
             return pre.concat(res);
         });
-    }, [query, cursor]);
+    }, [query]);
 
     useEffect(() => {
         setCards([]);
         setHaseMore(true);
-        fetchData();
+        fetchData(null);
     }, [query]);
 
     return (
@@ -88,7 +88,7 @@ export function GithubQuery({ query }: githubQueryType) {
             <InfiniteScroll
                 dataLength={cards.length}
                 hasMore={hasMore}
-                next={fetchData}
+                next={() => fetchData(cursor)}
                 endMessage={`没有更多了(total: ${cards.length})`}
                 loader={<Loading />}
             >
