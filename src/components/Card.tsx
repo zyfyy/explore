@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { RepoCard } from './Query';
+
+type Repo = RepoCard['repo'];
+
 const Border = styled.div`
     border-radius: 12px;
     padding: 12px;
@@ -47,6 +51,28 @@ const Url = styled.a`
     color: green;
     text-align: right;
 `;
+const List = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    column-gap: 1em;
+    row-gap: 5px;
+    padding: 0;
+`;
+const ListItem = styled.li`
+    white-space: nowrap;
+    background: #ddf4ff;
+    color: #0969da;
+    font-weight: 500;
+    padding: 0 10px;
+    font-size: 12px;
+    line-height: 22px;
+    border-radius: 2em;
+    cursor: pointer;
+    &:hover {
+        background: #54aeff66;
+    }
+`;
 
 const getHost = (url: string): string => {
     try {
@@ -57,7 +83,7 @@ const getHost = (url: string): string => {
     }
 };
 
-function Card(props) {
+function Card(props: { data: Repo }) {
     const { data } = props;
     return (
         <Border>
@@ -65,9 +91,20 @@ function Card(props) {
                 <Title>{data.name}</Title>
                 <Content>
                     <Img src={data.openGraphImageUrl} />
-                    <Desc>{data.description}</Desc>
+                    <Desc>
+                        <p>{data.description}</p>
+                    </Desc>
                 </Content>
             </Link>
+            <List>
+                {data.repositoryTopics.nodes.map(item => {
+                    return (
+                        <ListItem key={item.topic.name}>
+                            {item.topic.name}
+                        </ListItem>
+                    );
+                })}
+            </List>
             <Info>
                 <Star>star: {data.stars}</Star>
                 <Url href={data.homepageUrl} target="_blank">

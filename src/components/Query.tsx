@@ -14,6 +14,48 @@ const gqlCLient = new GraphQLClient('https://api.github.com/graphql', {
     }
 });
 
+interface TopicType {
+    totalCount: number;
+    nodes: {
+        topic: {
+            name: string;
+            stargazerCount: number;
+        };
+    }[];
+}
+
+interface LauguageType {
+    totalCount: number;
+    nodes: {
+        name: string;
+        color: number;
+    }[];
+}
+
+interface RepositoryType {
+    search: {
+        repos: {
+            cursor: string;
+            repo: {
+                name: string;
+                description: string;
+                openGraphImageUrl: string;
+                url: string;
+                homepageUrl: string;
+                stars: number;
+                forks: number;
+                watchers: {
+                    totalCount: number;
+                };
+                repositoryTopics: TopicType;
+                languages: LauguageType;
+            };
+        }[];
+    };
+}
+
+export type RepoCard = RepositoryType['search']['repos'][0];
+
 const graphqlQuery = gql`
     fragment result on SearchResultItemConnection {
         repositoryCount
@@ -31,13 +73,22 @@ const graphqlQuery = gql`
                     watchers {
                         totalCount
                     }
-                    labels {
+                    repositoryTopics(first: 100) {
                         totalCount
+                        nodes {
+                            topic {
+                                name
+                                stargazerCount
+                            }
+                        }
                     }
-                    languages {
+                    languages(first: 100) {
                         totalCount
+                        nodes {
+                            name
+                            color
+                        }
                     }
-                    diskUsage
                 }
             }
         }
@@ -57,25 +108,28 @@ interface staticQueryType {
 type githubQueryType = Pick<staticQueryType, 'query'>;
 
 export function GithubQuery({ query }: githubQueryType) {
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState<RepoCard[]>([]);
     const [cursor, setCursor] = useState(null);
     const [hasMore, setHaseMore] = useState(true);
 
-    const fetchData = useCallback(async (cursor: string) => {
-        const data = await gqlCLient.request(graphqlQuery, {
-            query,
-            cursor
-        });
-        const res = data.search.repos;
-        if (!res.length) {
-            setHaseMore(false);
-            return;
-        }
-        setCursor(res[res.length - 1]?.cursor);
-        setCards(pre => {
-            return pre.concat(res);
-        });
-    }, [query]);
+    const fetchData = useCallback(
+        async (cursor: string) => {
+            const data: RepositoryType = await gqlCLient.request(graphqlQuery, {
+                query,
+                cursor
+            });
+            const res = data.search.repos;
+            if (!res.length) {
+                setHaseMore(false);
+                return;
+            }
+            setCursor(res[res.length - 1]?.cursor);
+            setCards(pre => {
+                return pre.concat(res);
+            });
+        },
+        [query]
+    );
 
     useEffect(() => {
         setCards([]);
