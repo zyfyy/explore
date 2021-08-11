@@ -132,6 +132,7 @@ export function GithubQuery({ query }: githubQueryType) {
     );
 
     useEffect(() => {
+        console.log('effect query: ', query);
         setCards([]);
         setHaseMore(true);
         fetchData(null);
@@ -147,7 +148,12 @@ export function GithubQuery({ query }: githubQueryType) {
                 loader={<Loading />}
             >
                 {cards.map(card => {
-                    return <Card key={card.cursor} data={card.repo} />;
+                    return (
+                        <Card
+                            key={card.cursor + card.repo.name}
+                            data={card.repo}
+                        />
+                    );
                 })}
             </InfiniteScroll>
         </div>

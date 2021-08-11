@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Link } from 'gatsby';
+
 import { RepoCard } from './Query';
 
 type Repo = RepoCard['repo'];
@@ -17,7 +19,7 @@ const Border = styled.div`
         box-shadow: #dedede 5px 5px 10px 0px;
     }
 `;
-const Link = styled.a`
+const Open = styled.a`
     color: #000;
     text-decoration: none;
 `;
@@ -59,6 +61,9 @@ const List = styled.ul`
     row-gap: 5px;
     padding: 0;
 `;
+const TopicLink = styled(Link)`
+    text-decoration: none;
+`;
 const ListItem = styled.li`
     white-space: nowrap;
     background: #ddf4ff;
@@ -87,7 +92,7 @@ function Card(props: { data: Repo }) {
     const { data } = props;
     return (
         <Border>
-            <Link href={data.url} target="_blank">
+            <Open href={data.url} target="_blank">
                 <Title>{data.name}</Title>
                 <Content>
                     <Img src={data.openGraphImageUrl} />
@@ -95,13 +100,17 @@ function Card(props: { data: Repo }) {
                         <p>{data.description}</p>
                     </Desc>
                 </Content>
-            </Link>
+            </Open>
             <List>
                 {data.repositoryTopics.nodes.map(item => {
                     return (
-                        <ListItem key={item.topic.name}>
-                            {item.topic.name}
-                        </ListItem>
+                        <TopicLink
+                            to={`/Any/${item.topic.name}`}
+                            activeClassName="active"
+                            key={item.topic.name}
+                        >
+                            <ListItem>{item.topic.name}</ListItem>
+                        </TopicLink>
                     );
                 })}
             </List>
