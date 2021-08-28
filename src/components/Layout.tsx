@@ -1,14 +1,23 @@
 import * as React from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
-// TODO gatsby-plugin-scss-typescript does not generat .d.ts file
-import {
-    container,
-    heading,
-    navLinks,
-    navLinkItem,
-    navLinkText,
-    siteTitle
-} from './layout.module.css';
+import styled from 'styled-components';
+import { graphql, useStaticQuery } from 'gatsby';
+
+import Theme from './Theme';
+import Nav from './Nav';
+
+const Main = styled.main`
+    margin: auto;
+    max-width: 500px;
+    font-family: sans-serif;
+`;
+const Title = styled.p`
+    font-size: 3rem;
+    color: ${({ theme }) => theme.title};
+    font-weight: 700;
+`;
+const H1 = styled.h1`
+    color: ${({ theme }) => theme.h1};
+`;
 
 const Layout = ({ pageTitle, children }) => {
     const data = useStaticQuery(graphql`
@@ -21,61 +30,15 @@ const Layout = ({ pageTitle, children }) => {
         }
     `);
     return (
-        <main className={container}>
-            <title>{`${pageTitle} | ${data.site.siteMetadata.title}`}</title>
-            <p className={siteTitle}>{data.site.siteMetadata.title}</p>
-            <nav>
-                <ul className={navLinks}>
-                    <li className={navLinkItem}>
-                        <Link to="/" className={navLinkText}>
-                            Home
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/React" className={navLinkText}>
-                            React
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/Js" className={navLinkText}>
-                            Javascript
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/Ts" className={navLinkText}>
-                            Typescript
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/Css" className={navLinkText}>
-                            Css
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/Html" className={navLinkText}>
-                            Html
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/K8s" className={navLinkText}>
-                            k8s
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/All" className={navLinkText}>
-                            All Topic
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link to="/Any" className={navLinkText}>
-                            Any Topic
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-            <h1 className={heading}>{pageTitle}</h1>
-            {children}
-        </main>
+        <Theme>
+            <Main>
+                <title>{`${pageTitle} | ${data.site.siteMetadata.title}`}</title>
+                <Title>{data.site.siteMetadata.title}</Title>
+                <Nav />
+                <H1>{pageTitle}</H1>
+                {children}
+            </Main>
+        </Theme>
     );
 };
 

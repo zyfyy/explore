@@ -10,17 +10,17 @@ type Repo = RepoCard['repo'];
 const Border = styled.div`
     border-radius: 12px;
     padding: 12px;
-    border: 1px solid #ccc;
     margin-bottom: 1em;
-    box-shadow: #dedede 0px 0px 10px 0px;
     transition: box-shadow 200ms;
-
+    border: ${({ theme }) => theme.border};
+    background-color: ${({ theme }) => theme.cardbg};
+    box-shadow: ${({ theme }) => theme.boxshadow} 0px 0px 10px 0px;
     &:hover {
-        box-shadow: #dedede 5px 5px 10px 0px;
+        box-shadow: ${({ theme }) => theme.boxshadow} 5px 5px 10px 0px;
     }
 `;
 const Open = styled.a`
-    color: #000;
+    color: ${({ theme }) => theme.text};
     text-decoration: none;
 `;
 const Title = styled.div`
@@ -37,6 +37,7 @@ const Img = styled.img`
     display: block;
     margin: 0 auto;
     border-radius: 50%;
+    ${({ theme }) => (theme.light ? '' : 'filter: brightness(0.85);')}
 `;
 const Desc = styled.div`
     flex: 2;
@@ -66,16 +67,19 @@ const TopicLink = styled(Link)`
 `;
 const ListItem = styled.li`
     white-space: nowrap;
-    background: #ddf4ff;
-    color: #0969da;
     font-weight: 500;
     padding: 0 10px;
     font-size: 12px;
     line-height: 22px;
     border-radius: 2em;
     cursor: pointer;
+    font-weight: 500;
+
+    background: ${({ theme }) => theme.topic.bg};
+    color: ${({ theme }) => theme.topic.color};
     &:hover {
-        background: #54aeff66;
+        background: ${({ theme }) => theme.topic.hoverBg};
+        color: ${({ theme }) => theme.topic.hoverColor};
     }
 `;
 
