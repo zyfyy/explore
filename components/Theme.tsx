@@ -65,13 +65,13 @@ const GlobalStyles = createGlobalStyle`
     }
 `;
 
-function Theme(props) {
+function Theme({ children }: { children: React.ReactChild }) {
   const preferDark = useMedia('(prefers-color-scheme: dark)');
   const theme = preferDark ? darkTheme : lightTheme;
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
-      {props.children}
+      {children}
     </ThemeProvider>
   );
 }
