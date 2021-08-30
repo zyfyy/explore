@@ -10,8 +10,7 @@ const Main = styled.main`
   font-family: sans-serif;
   padding: 12px;
 `;
-const Title = styled.p`
-  font-size: 3rem;
+const Title = styled.h2`
   color: ${({ theme }) => theme.title};
   font-weight: 700;
 `;

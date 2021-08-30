@@ -42,7 +42,7 @@ const lightTheme = {
 
 const darkTheme = {
   light: false,
-  body: '#363537',
+  body: '#555',
   title: '#d6d6d6',
   h1: '#9d53e7',
   link: '#ccc',

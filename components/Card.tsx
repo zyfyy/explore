@@ -38,10 +38,16 @@ const Img = styled.img`
   margin: 0 auto;
   border-radius: 50%;
   ${({ theme }) => (theme.light ? '' : 'filter: brightness(0.85);')}
+
+  &:hover {
+    transform: rotate3d(0.9, 0.9, 0.9, 6deg);
+    transition: transform 500ms ease-out;
+  }
 `;
 const Desc = styled.div`
   flex: 2;
   padding: 1em;
+  word-break: break-all;
 `;
 const Info = styled.div`
   display: flex;
