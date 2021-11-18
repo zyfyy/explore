@@ -130,7 +130,7 @@ export function GithubQuery({ query }: githubQueryType) {
   );
 
   useEffect(() => {
-    console.log('effect query: ', query);
+    // console.log('effect query:', query);
     setCards([]);
     setHaseMore(true);
     fetchData(null);

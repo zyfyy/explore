@@ -7,10 +7,6 @@ const routes = [
     title: 'Home',
   },
   {
-    path: '/topic/react',
-    title: 'React',
-  },
-  {
     path: '/topic/javascript',
     title: 'Javascript',
   },
@@ -27,12 +23,24 @@ const routes = [
     title: 'Html',
   },
   {
-    path: '/topic/k8s',
+    path: '/topic/react',
+    title: 'React',
+  },
+  {
+    path: '/topic/nodejs',
+    title: 'Nodejs',
+  },
+  {
+    path: '/topic/kubernetes',
     title: 'K8s',
   },
   {
-    path: '/All',
-    title: 'All Topic',
+    path: '/topic/awesome',
+    title: 'Awesome',
+  },
+  {
+    path: '/Any',
+    title: 'Any',
   },
 ];
 
