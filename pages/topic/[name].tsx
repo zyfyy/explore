@@ -6,7 +6,6 @@ import { useRouter } from 'next/dist/client/router';
 
 import StaticQuery from '../../components/Query';
 
-
 const Topic: NextPage = () => {
   const route = useRouter();
 
@@ -14,10 +13,9 @@ const Topic: NextPage = () => {
   if (Array.isArray(title)) {
     title = title[0];
   }
-  let query = title? `topic:${title}` : 'star:>100';
+  let query = `topic:${title}`;
 
-
-  return (
+  return title ? (
     <div>
       <Head>
         <title>Github Explore | {title}</title>
@@ -25,6 +23,8 @@ const Topic: NextPage = () => {
       </Head>
       <StaticQuery title={title || 'Any'} query={query} />
     </div>
+  ) : (
+    <></>
   );
 };
 
