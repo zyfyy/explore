@@ -47,7 +47,8 @@ const Img = styled.img`
 const Desc = styled.div`
   flex: 2;
   padding: 1em;
-  word-break: break-all;
+  word-break: break-word;
+  white-space: break-spaces;
 `;
 const Info = styled.div`
   display: flex;
@@ -112,7 +113,7 @@ function Card(props: { data: Repo }) {
         </Content>
       </Open>
       <List>
-        {data.repositoryTopics.nodes.map((item) => {
+        {data.repositoryTopics.nodes.map(item => {
           return (
             <TopicLink href={`/topic/${item.topic.name}`} key={item.topic.name}>
               <ListItem>{item.topic.name}</ListItem>
