@@ -35,6 +35,14 @@ const routes = [
     title: 'K8s',
   },
   {
+    path: '/topic/ai',
+    title: 'Ai',
+  },
+  {
+    path: '/topic/gpt',
+    title: 'Gpt',
+  },
+  {
     path: '/topic/awesome',
     title: 'Awesome',
   },
